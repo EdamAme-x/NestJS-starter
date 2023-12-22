@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, Query } from '@nestjs/common';
+import { Body, Controller, Get, Post, Query, HttpCode, Header } from '@nestjs/common';
 import { AppService } from './app.service';
 
 @Controller("api2")
@@ -6,8 +6,12 @@ export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @Get()
+  @HttpCode(201)
+  @Header("Content-Type", "application/json")
   getHello(): string {
-    return this.appService.getHello();
+    return JSON.stringify({
+        "name": "amex2189"
+    });
   }
 
   @Get("query")
