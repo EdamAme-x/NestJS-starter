@@ -1,7 +1,7 @@
-import { Controller, Get, Post } from '@nestjs/common';
+import { Controller, Get, Post, Param } from '@nestjs/common';
 import { AppService } from './app.service';
 
-@Controller()
+@Controller("api")
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
@@ -20,5 +20,13 @@ export class AppController {
     return this.appService.getTime()
   }
 
-  
+  @Post('name/:param')
+  getPathParameters(@Param('param') param: string): string {
+    return `My Name is ${param}`;
+  }
+
+  @Post('i-am-*')
+  getGreet(): string {
+    return "hi!"
+  }
 }
